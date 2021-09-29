@@ -16,6 +16,8 @@ public class NumeroCelular implements ValueObject<String> {
             throw new IllegalArgumentException("El numero de celular debe ser de 10 digitos");
         }
 
+        //if(this.value.matches())
+
 
     }
 

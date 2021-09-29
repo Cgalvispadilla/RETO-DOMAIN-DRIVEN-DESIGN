@@ -25,4 +25,5 @@ public class Venta extends AggregateEvent<VentaID> {
         appendChange(new VentaCreada(fecha, metodoDePago)).apply();
     }
 
+
 }

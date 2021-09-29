@@ -2,19 +2,18 @@ package com.tumotoya.concesionarios.domain.venta.entities;
 
 
 import co.com.sofka.domain.generic.Entity;
+import com.tumotoya.concesionarios.domain.generics.values.Placa;
 import com.tumotoya.concesionarios.domain.venta.values.CantidadProducto;
 import com.tumotoya.concesionarios.domain.venta.values.DetalleID;
-import com.tumotoya.concesionarios.domain.venta.values.ProductoID;
 
 public class Detalle extends Entity<DetalleID> {
-    private  DetalleID detalleID;
-    private ProductoID productoID;
+    private DetalleID detalleID;
+    private Placa placa;
     private CantidadProducto cantidadProducto;
 
-    public Detalle(DetalleID entityId, DetalleID detalleID, ProductoID productoID, CantidadProducto cantidadProducto) {
+    public Detalle(DetalleID entityId, Placa placa, CantidadProducto cantidadProducto) {
         super(entityId);
-        this.detalleID = detalleID;
-        this.productoID = productoID;
+        this.placa = placa;
         this.cantidadProducto = cantidadProducto;
     }
 
@@ -22,8 +21,12 @@ public class Detalle extends Entity<DetalleID> {
         this.cantidadProducto = cantidadProducto;
     }
 
-    public ProductoID getProductoID() {
-        return productoID;
+    public DetalleID getDetalleID() {
+        return detalleID;
+    }
+
+    public Placa getPlaca() {
+        return placa;
     }
 
     public CantidadProducto getCantidadProducto() {

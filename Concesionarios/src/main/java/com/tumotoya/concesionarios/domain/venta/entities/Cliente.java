@@ -6,23 +6,23 @@ import com.tumotoya.concesionarios.domain.generics.values.Email;
 import com.tumotoya.concesionarios.domain.generics.values.Nombre;
 import com.tumotoya.concesionarios.domain.generics.values.NumeroCelular;
 import com.tumotoya.concesionarios.domain.venta.values.ClienteID;
-import com.tumotoya.concesionarios.domain.venta.values.VendedorID;
+
 
 public class Cliente extends Entity<ClienteID> {
-    private VendedorID vendedorID;
+    private ClienteID clienteID;
     private Nombre nombre;
     private NumeroCelular numeroCelular;
     private Direccion direccion;
     private Email email;
 
-    public Cliente(ClienteID entityId, VendedorID vendedorID, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email) {
+    public Cliente(ClienteID entityId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email) {
         super(entityId);
-        this.vendedorID = vendedorID;
         this.nombre = nombre;
         this.numeroCelular = numeroCelular;
         this.direccion = direccion;
         this.email = email;
     }
+
 
     public void actualizarNombre(Nombre nombre) {
         this.nombre = nombre;
@@ -40,10 +40,10 @@ public class Cliente extends Entity<ClienteID> {
         this.email = email;
     }
 
-    public VendedorID getVendedorID() {
-        return vendedorID;
-    }
 
+    public ClienteID clienteID() {
+        return clienteID;
+    }
     public Nombre getNombre() {
         return nombre;
     }

@@ -12,9 +12,8 @@ public class Vendedor extends Entity<VendedorID> {
     private NumeroCelular numeroCelular;
     private Direccion direccion;
 
-    public Vendedor(VendedorID entityId, VendedorID vendedorID, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion) {
+    public Vendedor(VendedorID entityId,  Nombre nombre, NumeroCelular numeroCelular, Direccion direccion) {
         super(entityId);
-        this.vendedorID = vendedorID;
         this.nombre = nombre;
         this.numeroCelular = numeroCelular;
         this.direccion = direccion;

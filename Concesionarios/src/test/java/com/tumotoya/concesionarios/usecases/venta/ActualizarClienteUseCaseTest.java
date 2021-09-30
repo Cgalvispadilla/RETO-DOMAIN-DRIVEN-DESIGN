@@ -5,16 +5,13 @@ import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.tumotoya.concesionarios.domain.generics.values.Direccion;
+import com.tumotoya.concesionarios.domain.generics.values.Email;
 import com.tumotoya.concesionarios.domain.generics.values.Nombre;
 import com.tumotoya.concesionarios.domain.generics.values.NumeroCelular;
+import com.tumotoya.concesionarios.domain.venta.commands.ActualizarCliente;
 import com.tumotoya.concesionarios.domain.venta.commands.ActualizarVendedor;
-import com.tumotoya.concesionarios.domain.venta.events.VendedorActualizado;
-import com.tumotoya.concesionarios.domain.venta.events.VendedorAgregado;
-import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
-import com.tumotoya.concesionarios.domain.venta.values.Fecha;
-import com.tumotoya.concesionarios.domain.venta.values.MetodoDePago;
-import com.tumotoya.concesionarios.domain.venta.values.VendedorID;
-import com.tumotoya.concesionarios.domain.venta.values.VentaID;
+import com.tumotoya.concesionarios.domain.venta.events.*;
+import com.tumotoya.concesionarios.domain.venta.values.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,38 +24,38 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
-class ActualizarVendedorUseCaseTest {
-    private static final String ID_VENDEDOR="1111-1111";
+class ActualizarClienteUseCaseTest {
+    private final String CLIENTE_ID="C-111";
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    @DisplayName("Esta prueba valida la funcionalidad a la hora de actualizar un vendedor en una venta")
-    void actuarlizarVendedorEnVentaDeManeraEsperada(){
+    @DisplayName("Esta prueba valida la funcionalidad a la hora de actualizar un cliente en una venta")
+    void actuarlizarClienteEnVentaDeManeraEsperada(){
         //arrange
-        var command = new ActualizarVendedor(
-                VentaID.of("1111"),
-                new VendedorID(ID_VENDEDOR),
-                new Nombre("Carlos"),
+        var command = new ActualizarCliente(
+                VentaID.of("X1111"),
+                new Nombre("Andres Galvis"),
                 new NumeroCelular("3116989942"),
-                new Direccion("Barrio el prado")
+                new Direccion("En algun lugar feliz vive"),
+                new Email("qwere@gmail.com")
         );
-        var useCase= new ActualizarVendedorUseCase();
-        Mockito.when(repository.getEventsBy(ID_VENDEDOR)).thenReturn(EventStored());
+        var useCase= new ActualizarClienteUseCase();
+        Mockito.when(repository.getEventsBy(Mockito.any())).thenReturn(EventStored());
         useCase.addRepository(repository);
 
         //act
         var events= UseCaseHandler.getInstance()
-                .setIdentifyExecutor(ID_VENDEDOR)
+                .setIdentifyExecutor("X1111")
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()
                 .getDomainEvents();
 
         //assert
-        var eventVendedorAgregado = (VendedorActualizado) events.get(0);
-        Assertions.assertEquals("Carlos", eventVendedorAgregado.getNombre().value());
+        var eventVendedorAgregado = (ClienteActualizado) events.get(0);
+        Assertions.assertEquals("Andres Galvis", eventVendedorAgregado.getNombre().value());
         Assertions.assertEquals("3116989942", eventVendedorAgregado.getNumeroCelular().value());
-        Assertions.assertEquals("Barrio el prado", eventVendedorAgregado.getDireccion().value());
+        Assertions.assertEquals("En algun lugar feliz vive", eventVendedorAgregado.getDireccion().value());
     }
 
     private List<DomainEvent> EventStored() {
@@ -67,15 +64,15 @@ class ActualizarVendedorUseCaseTest {
                         new Fecha(),
                         MetodoDePago.EFECTIVO
                 ),
-                new VendedorAgregado(
-                        new VendedorID(ID_VENDEDOR),
+                new ClienteAgregado(
+                        new ClienteID(CLIENTE_ID),
                         new Nombre("Jesus"),
                         new NumeroCelular("1111111111"),
-                        new Direccion("Algun lugar por ahí")
+                        new Direccion("Algun lugar por ahí"),
+                        new Email("unmalcorreo@gmail.com")
                 )
         );
     }
 
 
 }
-

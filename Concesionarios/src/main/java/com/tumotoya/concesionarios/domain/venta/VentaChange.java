@@ -3,10 +3,7 @@ package com.tumotoya.concesionarios.domain.venta;
 import co.com.sofka.domain.generic.EventChange;
 import com.tumotoya.concesionarios.domain.venta.entities.Cliente;
 import com.tumotoya.concesionarios.domain.venta.entities.Vendedor;
-import com.tumotoya.concesionarios.domain.venta.events.ClienteAgregado;
-import com.tumotoya.concesionarios.domain.venta.events.VendedorActualizado;
-import com.tumotoya.concesionarios.domain.venta.events.VendedorAgregado;
-import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
+import com.tumotoya.concesionarios.domain.venta.events.*;
 
 import java.util.HashSet;
 
@@ -36,6 +33,12 @@ public class VentaChange extends EventChange {
             vendedor.actualizarNombre(event.getNombre());
             vendedor.actualizarNumeroCelular(event.getNumeroCelular());
             vendedor.actualizarDireccion(event.getDireccion());
+        });
+        apply((ClienteActualizado event) -> {
+            venta.cliente.actualizarNombre(event.getNombre());
+            venta.cliente.actualizarDireccion(event.getDireccion());
+            venta.cliente.actualizarNumeroCelular(event.getNumeroCelular());
+            venta.cliente.actualizarEmail(event.getEmail());
         });
 
     }

@@ -6,10 +6,7 @@ import com.tumotoya.concesionarios.domain.generics.values.*;
 import com.tumotoya.concesionarios.domain.venta.entities.Cliente;
 import com.tumotoya.concesionarios.domain.venta.entities.Detalle;
 import com.tumotoya.concesionarios.domain.venta.entities.Vendedor;
-import com.tumotoya.concesionarios.domain.venta.events.ClienteAgregado;
-import com.tumotoya.concesionarios.domain.venta.events.VendedorActualizado;
-import com.tumotoya.concesionarios.domain.venta.events.VendedorAgregado;
-import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
+import com.tumotoya.concesionarios.domain.venta.events.*;
 import com.tumotoya.concesionarios.domain.venta.values.*;
 
 import java.util.List;
@@ -61,13 +58,12 @@ public class Venta extends AggregateEvent<VentaID> {
         Objects.requireNonNull(direccion);
         appendChange(new VendedorActualizado(entityId,nombre,numeroCelular, direccion)).apply();
     }
-    public void ActualizarCliente(ClienteID entityId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email){
-        Objects.requireNonNull(entityId);
+    public void ActualizarCliente( Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email){
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(numeroCelular);
         Objects.requireNonNull(direccion);
         Objects.requireNonNull(email);
-       // appendChange(new ClienteActualizado(entityId, nombre,numeroCelular, direccion,email)).apply();
+       appendChange(new ClienteActualizado(nombre,numeroCelular, direccion,email)).apply();
     }
     public void agregarDetalle(DetalleID entityId, Placa placa, CantidadProducto cantidadProducto){
         Objects.requireNonNull(entityId);

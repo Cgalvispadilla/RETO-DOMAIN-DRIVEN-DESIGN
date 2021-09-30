@@ -15,6 +15,7 @@ import com.tumotoya.concesionarios.domain.venta.events.VendedorAgregado;
 import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
 import com.tumotoya.concesionarios.domain.venta.values.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -31,6 +32,7 @@ class AgregarVendedorUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
+    @DisplayName("Esta prueba valida la funcionalidad a la hora de agregar un vendedor en una venta")
     void agregarVendedorEnVenta(){
         //arrange
         var command = new AgregarVendedor(

@@ -8,6 +8,7 @@ import com.tumotoya.concesionarios.domain.venta.values.Fecha;
 import com.tumotoya.concesionarios.domain.venta.values.MetodoDePago;
 import com.tumotoya.concesionarios.domain.venta.values.VentaID;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 
 class CrearVentaUseCaseTest {
     @Test
+    @DisplayName("Esta prueba valida la funcionalidad a la hora de crear una venta")
     void crearVenta(){
         //arrange
         var command = new CrearVenta(

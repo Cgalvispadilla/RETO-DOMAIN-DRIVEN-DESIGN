@@ -10,7 +10,6 @@ import com.tumotoya.concesionarios.domain.generics.values.Email;
 import com.tumotoya.concesionarios.domain.generics.values.Nombre;
 import com.tumotoya.concesionarios.domain.generics.values.NumeroCelular;
 import com.tumotoya.concesionarios.domain.venta.commands.AgregarCliente;
-import com.tumotoya.concesionarios.domain.venta.commands.CrearVenta;
 import com.tumotoya.concesionarios.domain.venta.events.ClienteAgregado;
 import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
 import com.tumotoya.concesionarios.domain.venta.values.ClienteID;
@@ -18,6 +17,7 @@ import com.tumotoya.concesionarios.domain.venta.values.Fecha;
 import com.tumotoya.concesionarios.domain.venta.values.MetodoDePago;
 import com.tumotoya.concesionarios.domain.venta.values.VentaID;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -32,6 +32,7 @@ class AgregarClienteUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
+    @DisplayName("Esta prueba valida la funcionalidad a la hora de agregar un cliente en una venta")
     void agregarClienteEnVenta(){
         //arrange
         var command = new AgregarCliente(VentaID.of("1111"),

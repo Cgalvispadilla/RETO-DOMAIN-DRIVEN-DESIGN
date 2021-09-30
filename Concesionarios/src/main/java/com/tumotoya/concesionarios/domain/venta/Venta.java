@@ -7,6 +7,7 @@ import com.tumotoya.concesionarios.domain.venta.entities.Cliente;
 import com.tumotoya.concesionarios.domain.venta.entities.Detalle;
 import com.tumotoya.concesionarios.domain.venta.entities.Vendedor;
 import com.tumotoya.concesionarios.domain.venta.events.ClienteAgregado;
+import com.tumotoya.concesionarios.domain.venta.events.VendedorActualizado;
 import com.tumotoya.concesionarios.domain.venta.events.VendedorAgregado;
 import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
 import com.tumotoya.concesionarios.domain.venta.values.*;
@@ -58,7 +59,7 @@ public class Venta extends AggregateEvent<VentaID> {
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(numeroCelular);
         Objects.requireNonNull(direccion);
-        //appendChange(new VendedorActualizado(nombre,numeroCelular, direccion)).apply();
+        appendChange(new VendedorActualizado(entityId,nombre,numeroCelular, direccion)).apply();
     }
     public void ActualizarCliente(ClienteID entityId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email){
         Objects.requireNonNull(entityId);

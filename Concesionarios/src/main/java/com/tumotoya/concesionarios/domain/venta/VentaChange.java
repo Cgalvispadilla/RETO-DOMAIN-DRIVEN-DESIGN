@@ -4,6 +4,7 @@ import co.com.sofka.domain.generic.EventChange;
 import com.tumotoya.concesionarios.domain.venta.entities.Cliente;
 import com.tumotoya.concesionarios.domain.venta.entities.Vendedor;
 import com.tumotoya.concesionarios.domain.venta.events.ClienteAgregado;
+import com.tumotoya.concesionarios.domain.venta.events.VendedorActualizado;
 import com.tumotoya.concesionarios.domain.venta.events.VendedorAgregado;
 import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
 
@@ -28,6 +29,13 @@ public class VentaChange extends EventChange {
                             event.getNumeroCelular(),
                             event.getDireccion())
             );
+        });
+        apply((VendedorActualizado event) -> {
+            Vendedor vendedor = venta.obtenerVendedorPorId(event.getEntityId())
+                    .orElseThrow(() -> new IllegalArgumentException("No existe un vendedor con ID " + event.getEntityId()));
+            vendedor.actualizarNombre(event.getNombre());
+            vendedor.actualizarNumeroCelular(event.getNumeroCelular());
+            vendedor.actualizarDireccion(event.getDireccion());
         });
 
     }

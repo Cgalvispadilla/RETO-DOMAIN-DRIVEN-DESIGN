@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CrearConcesionarioUseCaseTest {
     @Test
     @DisplayName("Esta prueba valida la funcionalidad a la hora de crear un concesionario")
-    void crearVenta() {
+    void crearConcesionario() {
         //arrange
         var command = new CrearConcesionario(
                 ConcesionarioID.of("C-1111"),

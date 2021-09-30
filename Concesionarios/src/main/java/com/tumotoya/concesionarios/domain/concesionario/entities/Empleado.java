@@ -13,7 +13,7 @@ public class Empleado extends Entity<EmpleadoID> {
     private NumeroCelular numeroCelular;
     private Direccion direccion;
     private Rol rol;
-    public Empleado(EmpleadoID entityId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion) {
+    public Empleado(EmpleadoID entityId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Rol rol) {
         super(entityId);
         this.nombre = nombre;
         this.numeroCelular = numeroCelular;

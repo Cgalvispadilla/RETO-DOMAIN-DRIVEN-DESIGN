@@ -13,14 +13,6 @@ import com.tumotoya.concesionarios.domain.concesionario.values.Rol;
 import com.tumotoya.concesionarios.domain.generics.values.Direccion;
 import com.tumotoya.concesionarios.domain.generics.values.Nombre;
 import com.tumotoya.concesionarios.domain.generics.values.NumeroCelular;
-import com.tumotoya.concesionarios.domain.venta.commands.AgregarVendedor;
-import com.tumotoya.concesionarios.domain.venta.events.VendedorAgregado;
-import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
-import com.tumotoya.concesionarios.domain.venta.values.Fecha;
-import com.tumotoya.concesionarios.domain.venta.values.MetodoDePago;
-import com.tumotoya.concesionarios.domain.venta.values.VendedorID;
-import com.tumotoya.concesionarios.domain.venta.values.VentaID;
-import com.tumotoya.concesionarios.usecases.venta.AgregarVendedorUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,12 +53,12 @@ class AgregarEmpleadoUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var eventVendedorAgregado = (EmpleadoAgregado) events.get(0);
-        Assertions.assertEquals("Carlos Galvis", eventVendedorAgregado.getNombre().value());
-        Assertions.assertEquals(ID_EMPLEADO, eventVendedorAgregado.getEntityId().value());
-        Assertions.assertEquals("3116989942", eventVendedorAgregado.getNumeroCelular().value());
-        Assertions.assertEquals("En algun lugar feliz", eventVendedorAgregado.getDireccion().value());
-        Assertions.assertEquals("Tengo un rol, tengo una responsabilidad", eventVendedorAgregado.getRol().value());
+        var eventEmpleadoAgregado = (EmpleadoAgregado) events.get(0);
+        Assertions.assertEquals("Carlos Galvis", eventEmpleadoAgregado.getNombre().value());
+        Assertions.assertEquals(ID_EMPLEADO, eventEmpleadoAgregado.getEntityId().value());
+        Assertions.assertEquals("3116989942", eventEmpleadoAgregado.getNumeroCelular().value());
+        Assertions.assertEquals("En algun lugar feliz", eventEmpleadoAgregado.getDireccion().value());
+        Assertions.assertEquals("Tengo un rol, tengo una responsabilidad", eventEmpleadoAgregado.getRol().value());
     }
 
     private List<DomainEvent> EventStored() {

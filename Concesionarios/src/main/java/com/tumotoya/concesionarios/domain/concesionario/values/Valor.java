@@ -13,7 +13,7 @@ public class Valor implements ValueObject<String> {
         if(this.value.isBlank()){
             throw new IllegalArgumentException("El valor no puede estar vacio");
         }
-        if (this.value.length() <= 6) {
+        if (this.value.length() <3) {
             throw new IllegalArgumentException("El valor debe tener minimo 6 digitos");
         }
     }

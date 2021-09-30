@@ -4,9 +4,11 @@ import co.com.sofka.domain.generic.EventChange;
 import com.tumotoya.concesionarios.domain.concesionario.commands.AgregarMantenimiento;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Empleado;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Mantenimiento;
+import com.tumotoya.concesionarios.domain.concesionario.entities.Moto;
 import com.tumotoya.concesionarios.domain.concesionario.events.ConcesionarioCreado;
 import com.tumotoya.concesionarios.domain.concesionario.events.EmpleadoAgregado;
 import com.tumotoya.concesionarios.domain.concesionario.events.MantenimientoAgregado;
+import com.tumotoya.concesionarios.domain.concesionario.events.MotoAgregada;
 import com.tumotoya.concesionarios.domain.concesionario.values.EmpleadoID;
 
 import java.util.HashSet;
@@ -18,7 +20,7 @@ public class ConcesionarioChange extends EventChange {
             concesionario.nombre = event.getNombre();
             concesionario.empleados = new HashSet<>();
             concesionario.motos = new HashSet<>();
-            concesionario.mantenimientos= new HashSet<>();
+            concesionario.mantenimientos = new HashSet<>();
             concesionario.ventas = new HashSet<>();
         });
 
@@ -32,10 +34,21 @@ public class ConcesionarioChange extends EventChange {
             ));
         });
 
-        apply((MantenimientoAgregado event)->{
+        apply((MantenimientoAgregado event) -> {
             concesionario.mantenimientos.add(new Mantenimiento(
                     event.getMantenimientoID(),
                     event.getNombre(),
+                    event.getValor()
+            ));
+        });
+
+        apply((MotoAgregada event) -> {
+            concesionario.motos.add(new Moto(
+                    event.getPlaca(),
+                    event.getNombre(),
+                    event.getMarca(),
+                    event.getModelo(),
+                    event.getCilindraje(),
                     event.getValor()
             ));
         });

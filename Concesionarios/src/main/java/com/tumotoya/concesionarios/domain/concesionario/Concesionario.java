@@ -8,10 +8,12 @@ import com.tumotoya.concesionarios.domain.concesionario.entities.Moto;
 import com.tumotoya.concesionarios.domain.concesionario.events.ConcesionarioCreado;
 import com.tumotoya.concesionarios.domain.concesionario.events.EmpleadoAgregado;
 import com.tumotoya.concesionarios.domain.concesionario.events.MantenimientoAgregado;
+import com.tumotoya.concesionarios.domain.concesionario.events.MotoAgregada;
 import com.tumotoya.concesionarios.domain.concesionario.values.*;
 import com.tumotoya.concesionarios.domain.generics.values.Direccion;
 import com.tumotoya.concesionarios.domain.generics.values.Nombre;
 import com.tumotoya.concesionarios.domain.generics.values.NumeroCelular;
+import com.tumotoya.concesionarios.domain.generics.values.Placa;
 import com.tumotoya.concesionarios.domain.venta.Venta;
 import com.tumotoya.concesionarios.domain.venta.VentaChange;
 import com.tumotoya.concesionarios.domain.venta.values.VentaID;
@@ -57,6 +59,15 @@ public class Concesionario extends AggregateEvent<ConcesionarioID> {
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(valor);
         appendChange(new MantenimientoAgregado(mantenimientoID, nombre, valor)).apply();
+    }
+    public void agregarMoto(Placa placa, Nombre nombre, Marca marca, Modelo modelo, Cilindraje cilindraje, Valor valor){
+        Objects.requireNonNull(placa);
+        Objects.requireNonNull(nombre);
+        Objects.requireNonNull(marca);
+        Objects.requireNonNull(modelo);
+        Objects.requireNonNull(cilindraje);
+        Objects.requireNonNull(valor);
+        appendChange(new MotoAgregada(placa, nombre, marca, modelo, cilindraje, valor)).apply();
     }
 
 }

@@ -55,10 +55,10 @@ class ActualizarVendedorUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var eventVendedorAgregado = (VendedorActualizado) events.get(0);
-        Assertions.assertEquals("Carlos", eventVendedorAgregado.getNombre().value());
-        Assertions.assertEquals("3116989942", eventVendedorAgregado.getNumeroCelular().value());
-        Assertions.assertEquals("Barrio el prado", eventVendedorAgregado.getDireccion().value());
+        var eventVendedorActualizado = (VendedorActualizado) events.get(0);
+        Assertions.assertEquals("Carlos", eventVendedorActualizado.getNombre().value());
+        Assertions.assertEquals("3116989942", eventVendedorActualizado.getNumeroCelular().value());
+        Assertions.assertEquals("Barrio el prado", eventVendedorActualizado.getDireccion().value());
     }
 
     private List<DomainEvent> EventStored() {

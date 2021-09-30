@@ -69,7 +69,7 @@ public class Venta extends AggregateEvent<VentaID> {
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(placa);
         Objects.requireNonNull(cantidadProducto);
-       // appendChange(new DetalleAgregado(entityId, productoID, cantidadProducto)).apply();
+       appendChange(new DetalleAgregado(entityId, placa, cantidadProducto)).apply();
     }
     public void actualizarCantidadProductoDetalle(DetalleID entityId, CantidadProducto cantidadProducto){
         Objects.requireNonNull(entityId);

@@ -9,7 +9,6 @@ import com.tumotoya.concesionarios.domain.generics.values.Email;
 import com.tumotoya.concesionarios.domain.generics.values.Nombre;
 import com.tumotoya.concesionarios.domain.generics.values.NumeroCelular;
 import com.tumotoya.concesionarios.domain.venta.commands.ActualizarCliente;
-import com.tumotoya.concesionarios.domain.venta.commands.ActualizarVendedor;
 import com.tumotoya.concesionarios.domain.venta.events.*;
 import com.tumotoya.concesionarios.domain.venta.values.*;
 import org.junit.jupiter.api.Assertions;
@@ -52,10 +51,10 @@ class ActualizarClienteUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var eventVendedorAgregado = (ClienteActualizado) events.get(0);
-        Assertions.assertEquals("Andres Galvis", eventVendedorAgregado.getNombre().value());
-        Assertions.assertEquals("3116989942", eventVendedorAgregado.getNumeroCelular().value());
-        Assertions.assertEquals("En algun lugar feliz vive", eventVendedorAgregado.getDireccion().value());
+        var eventVendedorActualizado = (ClienteActualizado) events.get(0);
+        Assertions.assertEquals("Andres Galvis", eventVendedorActualizado.getNombre().value());
+        Assertions.assertEquals("3116989942", eventVendedorActualizado.getNumeroCelular().value());
+        Assertions.assertEquals("En algun lugar feliz vive", eventVendedorActualizado.getDireccion().value());
     }
 
     private List<DomainEvent> EventStored() {

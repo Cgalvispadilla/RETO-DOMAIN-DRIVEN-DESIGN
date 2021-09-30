@@ -2,6 +2,7 @@ package com.tumotoya.concesionarios.domain.venta;
 
 import co.com.sofka.domain.generic.EventChange;
 import com.tumotoya.concesionarios.domain.venta.entities.Cliente;
+import com.tumotoya.concesionarios.domain.venta.entities.Detalle;
 import com.tumotoya.concesionarios.domain.venta.entities.Vendedor;
 import com.tumotoya.concesionarios.domain.venta.events.*;
 
@@ -39,6 +40,15 @@ public class VentaChange extends EventChange {
             venta.cliente.actualizarDireccion(event.getDireccion());
             venta.cliente.actualizarNumeroCelular(event.getNumeroCelular());
             venta.cliente.actualizarEmail(event.getEmail());
+        });
+
+        apply((DetalleAgregado event)->{
+            venta.detalles.add(
+                    new Detalle(event.getEntityId(),
+                            event.getPlaca(),
+                            event.getCantidadProducto()
+                    )
+            );
         });
 
     }

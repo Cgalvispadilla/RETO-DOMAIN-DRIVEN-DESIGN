@@ -9,9 +9,9 @@ import com.tumotoya.concesionarios.domain.venta.commands.ActualizarCantidadProdu
 public class ActualizarCantidadProductoDetalleUseCase extends UseCase<RequestCommand<ActualizarCantidadProductoDetalle>, ResponseEvents> {
     @Override
     public void executeUseCase(RequestCommand<ActualizarCantidadProductoDetalle> actualizarCantidadProductoDetalleRequestCommand) {
-        var command= actualizarCantidadProductoDetalleRequestCommand.getCommand();
-        var venta = Venta.from(command.getVentaID(),retrieveEvents(command.getEntityId().value()));
-        venta.actualizarCantidadProductoDetalle(command.getEntityId(),command.getCantidadProducto());
+        var command = actualizarCantidadProductoDetalleRequestCommand.getCommand();
+        var venta = Venta.from(command.getVentaID(), retrieveEvents(command.getEntityId().value()));
+        venta.actualizarCantidadProductoDetalle(command.getEntityId(), command.getCantidadProducto());
         emit().onResponse(new ResponseEvents(venta.getUncommittedChanges()));
     }
 }

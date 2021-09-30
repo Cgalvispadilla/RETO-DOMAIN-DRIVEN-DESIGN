@@ -9,13 +9,13 @@ public class Direccion implements ValueObject<String> {
 
     public Direccion(String value) {
         this.value = Objects.requireNonNull(value);
-        if(this.value.isBlank()){
+        if (this.value.isBlank()) {
             throw new IllegalArgumentException("La dirección no puede estar vació");
         }
-        if(this.value.length()<=5){
+        if (this.value.length() <= 5) {
             throw new IllegalArgumentException("La dirección debe tener minimo tres letras");
         }
-        if(this.value.length()>=100){
+        if (this.value.length() >= 100) {
             throw new IllegalArgumentException("La dirección debe tener menos de 100 letras");
         }
     }

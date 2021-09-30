@@ -14,9 +14,9 @@ public class ActualizarVendedor extends Command {
     private final NumeroCelular numeroCelular;
     private final Direccion direccion;
 
-    public ActualizarVendedor(VentaID ventaID,VendedorID vendedorID, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion) {
-        this.ventaID=ventaID;
-        this.vendedorID=vendedorID;
+    public ActualizarVendedor(VentaID ventaID, VendedorID vendedorID, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion) {
+        this.ventaID = ventaID;
+        this.vendedorID = vendedorID;
         this.nombre = nombre;
         this.numeroCelular = numeroCelular;
         this.direccion = direccion;

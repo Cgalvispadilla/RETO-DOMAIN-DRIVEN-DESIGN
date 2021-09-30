@@ -27,13 +27,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class AgregarVendedorUseCaseTest {
-    private static final String ID_VENDEDOR="1111-1111";
+    private static final String ID_VENDEDOR = "1111-1111";
     @Mock
     private DomainEventRepository repository;
 
     @Test
     @DisplayName("Esta prueba valida la funcionalidad a la hora de agregar un vendedor en una venta")
-    void agregarVendedorEnVenta(){
+    void agregarVendedorEnVenta() {
         //arrange
         var command = new AgregarVendedor(
                 VentaID.of("1111"),
@@ -42,12 +42,12 @@ class AgregarVendedorUseCaseTest {
                 new NumeroCelular("3116989942"),
                 new Direccion("Barrio el prado")
         );
-        var useCase= new AgregarVendedorUseCase();
+        var useCase = new AgregarVendedorUseCase();
         Mockito.when(repository.getEventsBy(ID_VENDEDOR)).thenReturn(EventStored());
         useCase.addRepository(repository);
 
         //act
-        var events= UseCaseHandler.getInstance()
+        var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(ID_VENDEDOR)
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()

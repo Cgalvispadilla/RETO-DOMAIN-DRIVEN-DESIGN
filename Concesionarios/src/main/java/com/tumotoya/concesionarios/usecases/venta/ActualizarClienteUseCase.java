@@ -7,12 +7,12 @@ import com.tumotoya.concesionarios.domain.venta.Venta;
 import com.tumotoya.concesionarios.domain.venta.commands.ActualizarCliente;
 
 
-public class ActualizarClienteUseCase extends UseCase<RequestCommand<ActualizarCliente>, ResponseEvents>{
+public class ActualizarClienteUseCase extends UseCase<RequestCommand<ActualizarCliente>, ResponseEvents> {
 
     @Override
     public void executeUseCase(RequestCommand<ActualizarCliente> actualizarClienteRequestCommand) {
         var command = actualizarClienteRequestCommand.getCommand();
-        var venta = Venta.from(command.getVentaID(),retrieveEvents(command.getVentaID().value()));
+        var venta = Venta.from(command.getVentaID(), retrieveEvents(command.getVentaID().value()));
         venta.ActualizarCliente(command.getNombre(), command.getNumeroCelular(), command.getDireccion(), command.getEmail());
         emit().onResponse(new ResponseEvents(venta.getUncommittedChanges()));
     }

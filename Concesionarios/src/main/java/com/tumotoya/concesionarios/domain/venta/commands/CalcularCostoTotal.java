@@ -8,7 +8,7 @@ public class CalcularCostoTotal extends Command {
     private final VentaID ventaID;
     private final CostoTotal costoTotal;
 
-    public CalcularCostoTotal(VentaID ventaID,CostoTotal costoTotal) {
+    public CalcularCostoTotal(VentaID ventaID, CostoTotal costoTotal) {
         this.ventaID = ventaID;
         this.costoTotal = costoTotal;
     }

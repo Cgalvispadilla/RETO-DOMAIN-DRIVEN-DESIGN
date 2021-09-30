@@ -10,7 +10,7 @@ public class AgregarDetalleUseCase extends UseCase<RequestCommand<AgregarDetalle
     @Override
     public void executeUseCase(RequestCommand<AgregarDetalle> agregarDetalleRequestCommand) {
         var command = agregarDetalleRequestCommand.getCommand();
-        var venta = Venta.from(command.getVentaID(),retrieveEvents(command.getDetalleID().value()));
+        var venta = Venta.from(command.getVentaID(), retrieveEvents(command.getDetalleID().value()));
         venta.agregarDetalle(command.getDetalleID(), command.getPlaca(), command.getCantidadProducto());
         emit().onResponse(new ResponseEvents(venta.getUncommittedChanges()));
     }

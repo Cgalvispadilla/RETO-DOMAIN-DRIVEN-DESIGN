@@ -21,6 +21,7 @@ public class Venta extends AggregateEvent<VentaID> {
     protected Set<Vendedor> vendedores;
     protected Cliente cliente;
     protected Set<Detalle> detalles;
+    protected Double bono;
 
     public Venta(VentaID entityId, Fecha fecha, MetodoDePago metodoDePago) {
         super(entityId);
@@ -89,6 +90,9 @@ public class Venta extends AggregateEvent<VentaID> {
         Objects.requireNonNull(costoTotal);
         appendChange(new CostoTotalCalculado(costoTotal)).apply();
     }
+    public void asignarBono(Double bono){
+        appendChange(new BonoAsignado(bono)).apply();
+    }
 
     public Fecha fecha() {
         return fecha;
@@ -112,6 +116,10 @@ public class Venta extends AggregateEvent<VentaID> {
 
     public Set<Detalle> detalles() {
         return detalles;
+    }
+
+    public Double bono() {
+        return bono;
     }
 
     public Optional<Detalle> obtenerDetallePorId(DetalleID detalleID) {

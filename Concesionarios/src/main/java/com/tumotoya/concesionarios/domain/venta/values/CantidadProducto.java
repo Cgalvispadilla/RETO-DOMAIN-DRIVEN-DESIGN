@@ -9,7 +9,7 @@ public class CantidadProducto implements ValueObject<Integer> {
 
     public CantidadProducto(Integer value) {
         this.value = Objects.requireNonNull(value);
-        if(this.value <=0){
+        if (this.value <= 0) {
             throw new IllegalArgumentException("La cantidad de producto no puede ser menor a cero");
         }
     }

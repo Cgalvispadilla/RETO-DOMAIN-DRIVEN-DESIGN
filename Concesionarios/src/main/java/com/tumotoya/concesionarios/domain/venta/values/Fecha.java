@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Fecha implements ValueObject<LocalDate> {
     private final LocalDate value = LocalDate.now();
+
     @Override
     public LocalDate value() {
         return value;

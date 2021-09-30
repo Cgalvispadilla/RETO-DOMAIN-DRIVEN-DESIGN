@@ -22,15 +22,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class ActualizarClienteUseCaseTest {
-    private final String CLIENTE_ID="C-111";
+    private final String CLIENTE_ID = "C-111";
     @Mock
     private DomainEventRepository repository;
 
     @Test
     @DisplayName("Esta prueba valida la funcionalidad a la hora de actualizar un cliente en una venta")
-    void actuarlizarClienteEnVentaDeManeraEsperada(){
+    void actuarlizarClienteEnVentaDeManeraEsperada() {
         //arrange
         var command = new ActualizarCliente(
                 VentaID.of("X1111"),
@@ -39,12 +40,12 @@ class ActualizarClienteUseCaseTest {
                 new Direccion("En algun lugar feliz vive"),
                 new Email("qwere@gmail.com")
         );
-        var useCase= new ActualizarClienteUseCase();
+        var useCase = new ActualizarClienteUseCase();
         Mockito.when(repository.getEventsBy(Mockito.any())).thenReturn(EventStored());
         useCase.addRepository(repository);
 
         //act
-        var events= UseCaseHandler.getInstance()
+        var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor("X1111")
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()

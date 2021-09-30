@@ -44,6 +44,7 @@ public class Cliente extends Entity<ClienteID> {
     public ClienteID clienteID() {
         return clienteID;
     }
+
     public Nombre getNombre() {
         return nombre;
     }

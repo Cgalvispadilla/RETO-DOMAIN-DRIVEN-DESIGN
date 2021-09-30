@@ -23,28 +23,29 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class ActualizarCantidadProductoDetalleUseCaseTest {
-    private final static String DETALLE_ID="D-111";
+    private final static String DETALLE_ID = "D-111";
 
     @Mock
     private DomainEventRepository repository;
 
     @Test
     @DisplayName("Esta prueba valida la funcionalidad a la hora de actualizar la cantiadad de producto en el detalle de una venta")
-    void actualizarCantidadProductoEnElDetalleDeUnaVenta(){
+    void actualizarCantidadProductoEnElDetalleDeUnaVenta() {
         //arrange
         var command = new ActualizarCantidadProductoDetalle(
                 new VentaID("V-111"),
                 new DetalleID(DETALLE_ID),
                 new CantidadProducto(4)
         );
-        var useCase= new ActualizarCantidadProductoDetalleUseCase();
+        var useCase = new ActualizarCantidadProductoDetalleUseCase();
         Mockito.when(repository.getEventsBy(Mockito.any())).thenReturn(EventStored());
         useCase.addRepository(repository);
 
         //act
-        var events= UseCaseHandler.getInstance()
+        var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(DETALLE_ID)
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()
@@ -68,4 +69,5 @@ class ActualizarCantidadProductoDetalleUseCaseTest {
                         new CantidadProducto(1)
                 )
         );
-    }}
+    }
+}

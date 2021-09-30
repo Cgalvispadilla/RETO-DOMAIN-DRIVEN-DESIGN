@@ -42,7 +42,7 @@ public class VentaChange extends EventChange {
             venta.cliente.actualizarEmail(event.getEmail());
         });
 
-        apply((DetalleAgregado event)->{
+        apply((DetalleAgregado event) -> {
             venta.detalles.add(
                     new Detalle(event.getEntityId(),
                             event.getPlaca(),
@@ -51,15 +51,19 @@ public class VentaChange extends EventChange {
             );
         });
 
-        apply((CantidadProductoDetalleActualizado event)->{
-            Detalle detalle= venta.obtenerDetallePorId(event.getEntityId()).orElseThrow(
-                    ()-> new IllegalArgumentException("No existe un detalle con ID"+event.getEntityId()));
+        apply((CantidadProductoDetalleActualizado event) -> {
+            Detalle detalle = venta.obtenerDetallePorId(event.getEntityId()).orElseThrow(
+                    () -> new IllegalArgumentException("No existe un detalle con ID" + event.getEntityId()));
             detalle.actualizarCantidadProducto(event.getCantidadProducto());
 
         });
 
-        apply((CostoTotalCalculado event)->{
-            venta.costoTotal=event.getCostoTotal();
+        apply((CostoTotalCalculado event) -> {
+            venta.costoTotal = event.getCostoTotal();
+        });
+
+        apply((BonoAsignado event)->{
+            venta.bono=event.getBono();
         });
 
     }

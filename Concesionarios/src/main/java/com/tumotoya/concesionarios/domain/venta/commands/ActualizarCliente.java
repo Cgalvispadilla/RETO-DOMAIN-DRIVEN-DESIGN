@@ -15,7 +15,7 @@ public class ActualizarCliente extends Command {
     private final Direccion direccion;
     private final Email email;
 
-    public ActualizarCliente(VentaID ventaID,  Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email) {
+    public ActualizarCliente(VentaID ventaID, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email) {
         this.ventaID = ventaID;
         this.nombre = nombre;
         this.numeroCelular = numeroCelular;

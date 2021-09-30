@@ -13,8 +13,8 @@ public class AgregarClienteUseCase extends UseCase<RequestCommand<AgregarCliente
     @Override
     public void executeUseCase(RequestCommand<AgregarCliente> agregarClienteRequestCommand) {
         var command = agregarClienteRequestCommand.getCommand();
-        var venta = Venta.from(command.getVentaID(),retrieveEvents(command.getClienteId().value()));
-        venta.agregarCliente(command.getClienteId(),command.getNombre(), command.getNumeroCelular(), command.getDireccion(), command.getEmail());
-        emit().onResponse( new ResponseEvents(venta.getUncommittedChanges()));
+        var venta = Venta.from(command.getVentaID(), retrieveEvents(command.getClienteId().value()));
+        venta.agregarCliente(command.getClienteId(), command.getNombre(), command.getNumeroCelular(), command.getDireccion(), command.getEmail());
+        emit().onResponse(new ResponseEvents(venta.getUncommittedChanges()));
     }
 }

@@ -21,15 +21,16 @@ import org.springframework.ui.ModelExtensionsKt;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class AgregarDetalleUseCaseTest {
-    private static final String DETALLE_ID="D-1111";
+    private static final String DETALLE_ID = "D-1111";
     @Mock
     private DomainEventRepository repository;
 
     @Test
     @DisplayName("Esta prueba valida la funcionalidad a la hora de agregar un detalle de venta en una venta")
-    void agregarClienteEnVenta(){
+    void agregarClienteEnVenta() {
         //arrange
         var command = new AgregarDetalle(
                 VentaID.of("V-1111"),
@@ -37,12 +38,12 @@ class AgregarDetalleUseCaseTest {
                 new Placa("XY1 K11"),
                 new CantidadProducto(1)
         );
-        var useCase= new AgregarDetalleUseCase();
+        var useCase = new AgregarDetalleUseCase();
         Mockito.when(repository.getEventsBy(DETALLE_ID)).thenReturn(EventStored());
         useCase.addRepository(repository);
 
         //act
-        var events= UseCaseHandler.getInstance()
+        var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(DETALLE_ID)
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()
@@ -50,9 +51,9 @@ class AgregarDetalleUseCaseTest {
 
         //assert
         var eventDetalleAgregado = (DetalleAgregado) events.get(0);
-       Assertions.assertEquals(DETALLE_ID, eventDetalleAgregado.getEntityId().value());
-       Assertions.assertEquals("XY1 K11", eventDetalleAgregado.getPlaca().value());
-       Assertions.assertEquals(1, command.getCantidadProducto().value());
+        Assertions.assertEquals(DETALLE_ID, eventDetalleAgregado.getEntityId().value());
+        Assertions.assertEquals("XY1 K11", eventDetalleAgregado.getPlaca().value());
+        Assertions.assertEquals(1, command.getCantidadProducto().value());
     }
 
     private List<DomainEvent> EventStored() {

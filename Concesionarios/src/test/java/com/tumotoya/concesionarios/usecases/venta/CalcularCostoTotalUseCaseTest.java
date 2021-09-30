@@ -6,7 +6,6 @@ import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.tumotoya.concesionarios.domain.venta.commands.CalcularCostoTotal;
 import com.tumotoya.concesionarios.domain.venta.events.CostoTotalCalculado;
-import com.tumotoya.concesionarios.domain.venta.events.VendedorAgregado;
 import com.tumotoya.concesionarios.domain.venta.events.VentaCreada;
 import com.tumotoya.concesionarios.domain.venta.values.CostoTotal;
 import com.tumotoya.concesionarios.domain.venta.values.Fecha;
@@ -23,6 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class CalcularCostoTotalUseCaseTest {
     private static final String ID_VENTA = "V-111";
@@ -50,7 +50,7 @@ class CalcularCostoTotalUseCaseTest {
 
         //assert
         var eventCostoTotalActualizado = (CostoTotalCalculado) events.get(0);
-        Assertions.assertEquals(13030010D,eventCostoTotalActualizado.getCostoTotal().value());
+        Assertions.assertEquals(13030010D, eventCostoTotalActualizado.getCostoTotal().value());
     }
 
     private List<DomainEvent> EventStored() {

@@ -25,15 +25,16 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+
 @ExtendWith(MockitoExtension.class)
 class AgregarClienteUseCaseTest {
-    private static final String IDCLIENTE="1111-1111";
+    private static final String IDCLIENTE = "1111-1111";
     @Mock
     private DomainEventRepository repository;
 
     @Test
     @DisplayName("Esta prueba valida la funcionalidad a la hora de agregar un cliente en una venta")
-    void agregarClienteEnVenta(){
+    void agregarClienteEnVenta() {
         //arrange
         var command = new AgregarCliente(VentaID.of("1111"),
                 new ClienteID(IDCLIENTE),
@@ -42,12 +43,12 @@ class AgregarClienteUseCaseTest {
                 new Direccion("Barrio el prado"),
                 new Email("Fktcg99@gmail.com")
         );
-        var useCase= new AgregarClienteUseCase();
+        var useCase = new AgregarClienteUseCase();
         Mockito.when(repository.getEventsBy(IDCLIENTE)).thenReturn(EventStored());
         useCase.addRepository(repository);
 
         //act
-        var events= UseCaseHandler.getInstance()
+        var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(IDCLIENTE)
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()

@@ -9,13 +9,13 @@ public class Nombre implements ValueObject<String> {
 
     public Nombre(String value) {
         this.value = Objects.requireNonNull(value);
-        if(this.value.isBlank()){
+        if (this.value.isBlank()) {
             throw new IllegalArgumentException("El Nombre no puede estar vació");
         }
-        if(this.value.length()<=3){
+        if (this.value.length() <= 3) {
             throw new IllegalArgumentException("El nombre debe tener minimo tres letras");
         }
-        if(this.value.length()>=100){
+        if (this.value.length() >= 100) {
             throw new IllegalArgumentException("El nombre debe tener menos de 100 letras");
         }
     }

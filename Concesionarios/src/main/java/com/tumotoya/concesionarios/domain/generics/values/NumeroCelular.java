@@ -9,10 +9,10 @@ public class NumeroCelular implements ValueObject<String> {
 
     public NumeroCelular(String value) {
         this.value = Objects.requireNonNull(value);
-        if(this.value.isBlank()){
+        if (this.value.isBlank()) {
             throw new IllegalArgumentException("El numero de celular no puede estar vació");
         }
-        if(this.value.length()!=10){
+        if (this.value.length() != 10) {
             throw new IllegalArgumentException("El numero de celular debe ser de 10 digitos");
         }
 

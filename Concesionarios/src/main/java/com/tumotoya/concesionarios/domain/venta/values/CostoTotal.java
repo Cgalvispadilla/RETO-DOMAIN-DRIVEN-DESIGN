@@ -6,9 +6,10 @@ import java.util.Objects;
 
 public class CostoTotal implements ValueObject<Double> {
     private final Double value;
+
     public CostoTotal(Double value) {
         this.value = Objects.requireNonNull(value);
-        if(this.value <=0){
+        if (this.value <= 0) {
             throw new IllegalArgumentException("El precio no puede ser menor a cero");
         }
     }

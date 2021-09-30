@@ -17,7 +17,7 @@ import java.time.LocalDate;
 class CrearVentaUseCaseTest {
     @Test
     @DisplayName("Esta prueba valida la funcionalidad a la hora de crear una venta")
-    void crearVenta(){
+    void crearVenta() {
         //arrange
         var command = new CrearVenta(
                 VentaID.of("1111"),
@@ -33,7 +33,7 @@ class CrearVentaUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var event = (VentaCreada)events.get(0);
+        var event = (VentaCreada) events.get(0);
         Assertions.assertEquals(LocalDate.now(), event.getFecha().value());
         Assertions.assertEquals("EFECTIVO", event.getMetodoDePago().name());
     }

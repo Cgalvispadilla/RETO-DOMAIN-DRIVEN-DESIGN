@@ -51,5 +51,12 @@ public class VentaChange extends EventChange {
             );
         });
 
+        apply((CantidadProductoDetalleActualizado event)->{
+            Detalle detalle= venta.obtenerDetallePorId(event.getEntityId()).orElseThrow(
+                    ()-> new IllegalArgumentException("No existe un detalle con ID"+event.getEntityId()));
+            detalle.actualizarCantidadProducto(event.getCantidadProducto());
+
+        });
+
     }
 }

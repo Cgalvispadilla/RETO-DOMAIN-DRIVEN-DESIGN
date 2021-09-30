@@ -74,7 +74,7 @@ public class Venta extends AggregateEvent<VentaID> {
     public void actualizarCantidadProductoDetalle(DetalleID entityId, CantidadProducto cantidadProducto){
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(cantidadProducto);
-       // appendChange(new CantidadProductoActualizado(entityId, cantidadProducto));
+       appendChange(new CantidadProductoDetalleActualizado(entityId, cantidadProducto));
     }
 
     public Fecha fecha() {

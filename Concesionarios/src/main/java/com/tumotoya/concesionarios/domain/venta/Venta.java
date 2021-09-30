@@ -22,59 +22,72 @@ public class Venta extends AggregateEvent<VentaID> {
     protected Cliente cliente;
     protected Set<Detalle> detalles;
 
-    public Venta(VentaID entityId, Fecha fecha,MetodoDePago metodoDePago) {
+    public Venta(VentaID entityId, Fecha fecha, MetodoDePago metodoDePago) {
         super(entityId);
         Objects.requireNonNull(fecha);
         Objects.requireNonNull(metodoDePago);
         appendChange(new VentaCreada(fecha, metodoDePago)).apply();
     }
-    private Venta(VentaID  entityID){
+
+    private Venta(VentaID entityID) {
         super(entityID);
         subscribe(new VentaChange(this));
     }
-    public static Venta from(VentaID entityID, List<DomainEvent>events){
-        Venta venta= new Venta(entityID);
+
+    public static Venta from(VentaID entityID, List<DomainEvent> events) {
+        Venta venta = new Venta(entityID);
         events.forEach(venta::applyEvent);
         return venta;
     }
-    public void agregarCliente(ClienteID clienteId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email){
+
+    public void agregarCliente(ClienteID clienteId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email) {
         Objects.requireNonNull(clienteId);
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(numeroCelular);
         Objects.requireNonNull(direccion);
         Objects.requireNonNull(email);
-        appendChange(new ClienteAgregado( clienteId,nombre,numeroCelular, direccion,email)).apply();
+        appendChange(new ClienteAgregado(clienteId, nombre, numeroCelular, direccion, email)).apply();
     }
-    public void agregarVendedor(VendedorID vendedorId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion){
+
+    public void agregarVendedor(VendedorID vendedorId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion) {
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(numeroCelular);
         Objects.requireNonNull(direccion);
-      appendChange(new VendedorAgregado(vendedorId,nombre,numeroCelular, direccion)).apply();
+        appendChange(new VendedorAgregado(vendedorId, nombre, numeroCelular, direccion)).apply();
     }
-    public void actualizarVendedor(VendedorID entityId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion){
+
+    public void actualizarVendedor(VendedorID entityId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion) {
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(numeroCelular);
         Objects.requireNonNull(direccion);
-        appendChange(new VendedorActualizado(entityId,nombre,numeroCelular, direccion)).apply();
+        appendChange(new VendedorActualizado(entityId, nombre, numeroCelular, direccion)).apply();
     }
-    public void ActualizarCliente( Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email){
+
+    public void ActualizarCliente(Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Email email) {
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(numeroCelular);
         Objects.requireNonNull(direccion);
         Objects.requireNonNull(email);
-       appendChange(new ClienteActualizado(nombre,numeroCelular, direccion,email)).apply();
+        appendChange(new ClienteActualizado(nombre, numeroCelular, direccion, email)).apply();
     }
-    public void agregarDetalle(DetalleID entityId, Placa placa, CantidadProducto cantidadProducto){
+
+    public void agregarDetalle(DetalleID entityId, Placa placa, CantidadProducto cantidadProducto) {
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(placa);
         Objects.requireNonNull(cantidadProducto);
-       appendChange(new DetalleAgregado(entityId, placa, cantidadProducto)).apply();
+        appendChange(new DetalleAgregado(entityId, placa, cantidadProducto)).apply();
     }
-    public void actualizarCantidadProductoDetalle(DetalleID entityId, CantidadProducto cantidadProducto){
+
+    public void actualizarCantidadProductoDetalle(DetalleID entityId, CantidadProducto cantidadProducto) {
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(cantidadProducto);
-       appendChange(new CantidadProductoDetalleActualizado(entityId, cantidadProducto));
+        appendChange(new CantidadProductoDetalleActualizado(entityId, cantidadProducto));
+    }
+
+    public void calcularCostoTotal(CostoTotal costoTotal) {
+        Objects.requireNonNull(costoTotal);
+        appendChange(new CostoTotalCalculado(costoTotal)).apply();
     }
 
     public Fecha fecha() {
@@ -106,6 +119,7 @@ public class Venta extends AggregateEvent<VentaID> {
                 .filter(detalle -> detalle.identity().equals(detalleID))
                 .findFirst();
     }
+
     public Optional<Vendedor> obtenerVendedorPorId(VendedorID vendedorID) {
         return vendedores().stream()
                 .filter(vendedor -> vendedor.identity().equals(vendedorID))

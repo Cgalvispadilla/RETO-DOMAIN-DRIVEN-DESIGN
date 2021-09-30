@@ -58,5 +58,9 @@ public class VentaChange extends EventChange {
 
         });
 
+        apply((CostoTotalCalculado event)->{
+            venta.costoTotal=event.getCostoTotal();
+        });
+
     }
 }

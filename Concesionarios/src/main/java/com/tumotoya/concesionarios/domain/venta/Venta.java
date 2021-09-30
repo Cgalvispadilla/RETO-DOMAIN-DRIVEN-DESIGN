@@ -94,6 +94,10 @@ public class Venta extends AggregateEvent<VentaID> {
         appendChange(new BonoAsignado(bono)).apply();
     }
 
+    public void asignarDescuentoPorPagoConTarjeta(Double descuento){
+        appendChange(new DescuentoPorPagoConTarjetaAsignado(descuento)).apply();
+    }
+
     public Fecha fecha() {
         return fecha;
     }

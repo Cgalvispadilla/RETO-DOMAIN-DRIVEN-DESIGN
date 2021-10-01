@@ -81,6 +81,15 @@ public class Concesionario extends AggregateEvent<ConcesionarioID> {
         Objects.requireNonNull(direccion);
         appendChange(new EmpleadoActualizado(entityId, nombre, numeroCelular, direccion, rol)).apply();
     }
+    public void actualizarMoto(Placa placa, Nombre nombre, Marca marca, Modelo modelo, Cilindraje cilindraje, Valor valor){
+        Objects.requireNonNull(placa);
+        Objects.requireNonNull(nombre);
+        Objects.requireNonNull(marca);
+        Objects.requireNonNull(modelo);
+        Objects.requireNonNull(cilindraje);
+        Objects.requireNonNull(valor);
+        appendChange(new MotoActualizada(placa, nombre, marca, modelo, cilindraje, valor)).apply();
+    }
     public Optional<Empleado> obtenerEmpleadoPorId(EmpleadoID empleadoID) {
         return empleados().stream()
                 .filter(empleado -> empleado.identity().equals(empleadoID))

@@ -5,10 +5,7 @@ import co.com.sofka.domain.generic.DomainEvent;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Empleado;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Mantenimiento;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Moto;
-import com.tumotoya.concesionarios.domain.concesionario.events.ConcesionarioCreado;
-import com.tumotoya.concesionarios.domain.concesionario.events.EmpleadoAgregado;
-import com.tumotoya.concesionarios.domain.concesionario.events.MantenimientoAgregado;
-import com.tumotoya.concesionarios.domain.concesionario.events.MotoAgregada;
+import com.tumotoya.concesionarios.domain.concesionario.events.*;
 import com.tumotoya.concesionarios.domain.concesionario.values.*;
 import com.tumotoya.concesionarios.domain.generics.values.Direccion;
 import com.tumotoya.concesionarios.domain.generics.values.Nombre;
@@ -68,6 +65,11 @@ public class Concesionario extends AggregateEvent<ConcesionarioID> {
         Objects.requireNonNull(cilindraje);
         Objects.requireNonNull(valor);
         appendChange(new MotoAgregada(placa, nombre, marca, modelo, cilindraje, valor)).apply();
+    }
+
+    public void agregarVenta(VentaID ventaID){
+        Objects.requireNonNull(ventaID);
+        appendChange(new VentaAgregada(ventaID)).apply();
     }
 
 }

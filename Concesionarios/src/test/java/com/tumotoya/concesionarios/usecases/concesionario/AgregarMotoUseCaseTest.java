@@ -4,10 +4,8 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import com.tumotoya.concesionarios.domain.concesionario.commands.AgregarMantenimiento;
 import com.tumotoya.concesionarios.domain.concesionario.commands.AgregarMoto;
 import com.tumotoya.concesionarios.domain.concesionario.events.ConcesionarioCreado;
-import com.tumotoya.concesionarios.domain.concesionario.events.MantenimientoAgregado;
 import com.tumotoya.concesionarios.domain.concesionario.events.MotoAgregada;
 import com.tumotoya.concesionarios.domain.concesionario.values.*;
 import com.tumotoya.concesionarios.domain.generics.values.Nombre;
@@ -52,13 +50,13 @@ class AgregarMotoUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var eventMatenimientoAgregado = (MotoAgregada) events.get(0);
-        Assertions.assertEquals(PLACA, eventMatenimientoAgregado.getPlaca().value());
-        Assertions.assertEquals("CB160", eventMatenimientoAgregado.getNombre().value());
-        Assertions.assertEquals("Honda", eventMatenimientoAgregado.getMarca().value());
-        Assertions.assertEquals("2022", eventMatenimientoAgregado.getModelo().value());
-        Assertions.assertEquals("160", eventMatenimientoAgregado.getCilindraje().value());
-        Assertions.assertEquals("8500000", eventMatenimientoAgregado.getValor().value());
+        var eventMotoAgregado = (MotoAgregada) events.get(0);
+        Assertions.assertEquals(PLACA, eventMotoAgregado.getPlaca().value());
+        Assertions.assertEquals("CB160", eventMotoAgregado.getNombre().value());
+        Assertions.assertEquals("Honda", eventMotoAgregado.getMarca().value());
+        Assertions.assertEquals("2022", eventMotoAgregado.getModelo().value());
+        Assertions.assertEquals("160", eventMotoAgregado.getCilindraje().value());
+        Assertions.assertEquals("8500000", eventMotoAgregado.getValor().value());
     }
 
     private List<DomainEvent> EventStored() {

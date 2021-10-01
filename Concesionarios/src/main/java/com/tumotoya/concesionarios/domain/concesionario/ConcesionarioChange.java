@@ -5,11 +5,9 @@ import com.tumotoya.concesionarios.domain.concesionario.commands.AgregarMantenim
 import com.tumotoya.concesionarios.domain.concesionario.entities.Empleado;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Mantenimiento;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Moto;
-import com.tumotoya.concesionarios.domain.concesionario.events.ConcesionarioCreado;
-import com.tumotoya.concesionarios.domain.concesionario.events.EmpleadoAgregado;
-import com.tumotoya.concesionarios.domain.concesionario.events.MantenimientoAgregado;
-import com.tumotoya.concesionarios.domain.concesionario.events.MotoAgregada;
+import com.tumotoya.concesionarios.domain.concesionario.events.*;
 import com.tumotoya.concesionarios.domain.concesionario.values.EmpleadoID;
+import com.tumotoya.concesionarios.domain.venta.values.VentaID;
 
 import java.util.HashSet;
 
@@ -51,6 +49,10 @@ public class ConcesionarioChange extends EventChange {
                     event.getCilindraje(),
                     event.getValor()
             ));
+        });
+
+        apply((VentaAgregada event)->{
+            concesionario.ventas.add(new VentaID(event.getVentaID().value()));
         });
     }
 }

@@ -34,7 +34,7 @@ class ActualizarMotoUseCaseTest {
         var command = new ActualizarMoto(
                 ConcesionarioID.of("C-1234"),
                 new Placa(PLACA),
-                new Nombre("Boxer"),
+                new Nombre("BOXER"),
                 new Marca("BAJAJ"),
                 new Modelo("2022"),
                 new Cilindraje("100"),
@@ -55,7 +55,7 @@ class ActualizarMotoUseCaseTest {
         var eventMotoActualizada = (MotoActualizada) events.get(0);
         Assertions.assertEquals("BOXER", eventMotoActualizada.getNombre().value());
         Assertions.assertEquals("BAJAJ", eventMotoActualizada.getMarca().value());
-        Assertions.assertEquals("2022", eventMotoActualizada.getCilindraje().value());
+        Assertions.assertEquals("2022", eventMotoActualizada.getModelo().value());
         Assertions.assertEquals("100", eventMotoActualizada.getCilindraje().value());
         Assertions.assertEquals("4000000", eventMotoActualizada.getValor().value());
 

@@ -61,6 +61,7 @@ class AgregarClienteUseCaseTest {
         Assertions.assertEquals("3116989942", eventClienteAgregado.getNumeroCelular().value());
         Assertions.assertEquals("Fktcg99@gmail.com", eventClienteAgregado.getEmail().value());
         Assertions.assertEquals("Barrio el prado", eventClienteAgregado.getDireccion().value());
+        Mockito.verify(repository).getEventsBy(IDCLIENTE);
     }
 
     private List<DomainEvent> EventStored() {

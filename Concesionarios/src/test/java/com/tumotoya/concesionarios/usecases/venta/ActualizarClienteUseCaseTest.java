@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class ActualizarClienteUseCaseTest {
     private final String CLIENTE_ID = "C-111";
+    private final String VENTA_ID= "V-111";
     @Mock
     private DomainEventRepository repository;
 
@@ -34,19 +35,19 @@ class ActualizarClienteUseCaseTest {
     void actuarlizarClienteEnVentaDeManeraEsperada() {
         //arrange
         var command = new ActualizarCliente(
-                VentaID.of("X1111"),
+                VentaID.of(VENTA_ID),
                 new Nombre("Andres Galvis"),
                 new NumeroCelular("3116989942"),
                 new Direccion("En algun lugar feliz vive"),
                 new Email("qwere@gmail.com")
         );
         var useCase = new ActualizarClienteUseCase();
-        Mockito.when(repository.getEventsBy(Mockito.any())).thenReturn(EventStored());
+        Mockito.when(repository.getEventsBy(VENTA_ID)).thenReturn(EventStored());
         useCase.addRepository(repository);
 
         //act
         var events = UseCaseHandler.getInstance()
-                .setIdentifyExecutor("X1111")
+                .setIdentifyExecutor(VENTA_ID)
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()
                 .getDomainEvents();
@@ -56,6 +57,7 @@ class ActualizarClienteUseCaseTest {
         Assertions.assertEquals("Andres Galvis", eventClienteActualizado.getNombre().value());
         Assertions.assertEquals("3116989942", eventClienteActualizado.getNumeroCelular().value());
         Assertions.assertEquals("En algun lugar feliz vive", eventClienteActualizado.getDireccion().value());
+        Mockito.verify(repository).getEventsBy(VENTA_ID);
     }
 
     private List<DomainEvent> EventStored() {

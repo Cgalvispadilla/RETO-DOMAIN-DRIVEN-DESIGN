@@ -51,6 +51,7 @@ class CalcularCostoTotalUseCaseTest {
         //assert
         var eventCostoTotalActualizado = (CostoTotalCalculado) events.get(0);
         Assertions.assertEquals(13030010D, eventCostoTotalActualizado.getCostoTotal().value());
+        Mockito.verify(repository).getEventsBy(ID_VENTA);
     }
 
     private List<DomainEvent> EventStored() {

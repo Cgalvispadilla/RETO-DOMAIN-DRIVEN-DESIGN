@@ -19,6 +19,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,9 +58,47 @@ class AsignarDescuentoPorPagoConTarjetaUseCaseTest {
         var eventDescuentoAsignado = (CostoTotalCalculado) events.get(1);
         Assertions.assertEquals(PORCENTAJE_DESCUENTO, eventDescuentoCreado.getDescuento());
         Assertions.assertEquals(6825000, eventDescuentoAsignado.getCostoTotal().value());
+        Mockito.verify(repository).getEventsBy(VENTAID);
 
     }
+    @Test
+    @DisplayName("Prueba para validar la no asignacion de un descuento cuando una venta supere 6 millones y pague por tarjeta")
+    void noAsignaDescuentoPorPagoConTarjeta() {
+        //arrange
+        var event = new VentaCreada(
+                new Fecha(),
+                MetodoDePago.TARJETA
+        );
+        event.setAggregateRootId(VENTAID);
 
+        var useCase = new AsignarDescuentoPorPagoConTarjetaUseCase();
+        Mockito.when(repository.getEventsBy(VENTAID)).thenReturn(eventStoredFail());
+        useCase.addRepository(repository);
+
+
+        Assertions.assertThrows(NoSuchElementException.class,()->{
+            var events = UseCaseHandler.getInstance()
+                    .setIdentifyExecutor(VENTAID)
+                    .syncExecutor(useCase, new TriggeredEvent<>(event))
+                    .orElseThrow()
+                    .getDomainEvents();
+        });
+
+
+    }
+    private List<DomainEvent> eventStoredFail() {
+        var event = new VentaCreada(
+                new Fecha(),
+                MetodoDePago.TARJETA
+        );
+        var eventCalcularCostoTotal = new CostoTotalCalculado(
+                new CostoTotal(700000D)
+        );
+        return List.of(
+                event,
+                eventCalcularCostoTotal
+        );
+    }
     private List<DomainEvent> eventStored() {
         var event = new VentaCreada(
                 new Fecha(),

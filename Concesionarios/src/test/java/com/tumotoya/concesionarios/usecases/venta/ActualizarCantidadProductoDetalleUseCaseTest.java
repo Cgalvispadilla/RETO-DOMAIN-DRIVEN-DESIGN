@@ -53,8 +53,9 @@ class ActualizarCantidadProductoDetalleUseCaseTest {
 
         //assert
         var eventCantidadProductoDetalleActualizado = (CantidadProductoDetalleActualizado) events.get(0);
+        Assertions.assertEquals(DETALLE_ID, eventCantidadProductoDetalleActualizado.getEntityId().value());
         Assertions.assertEquals(4, eventCantidadProductoDetalleActualizado.getCantidadProducto().value());
-
+        Mockito.verify(repository).getEventsBy(DETALLE_ID);
     }
 
     private List<DomainEvent> EventStored() {

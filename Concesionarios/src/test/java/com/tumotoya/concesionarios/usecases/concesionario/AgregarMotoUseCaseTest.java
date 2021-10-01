@@ -57,6 +57,7 @@ class AgregarMotoUseCaseTest {
         Assertions.assertEquals("2022", eventMotoAgregado.getModelo().value());
         Assertions.assertEquals("160", eventMotoAgregado.getCilindraje().value());
         Assertions.assertEquals("8500000", eventMotoAgregado.getValor().value());
+        Mockito.verify(repository).getEventsBy(PLACA);
     }
 
     private List<DomainEvent> EventStored() {

@@ -54,6 +54,7 @@ class AgregarDetalleUseCaseTest {
         Assertions.assertEquals(DETALLE_ID, eventDetalleAgregado.getEntityId().value());
         Assertions.assertEquals("XY1 K11", eventDetalleAgregado.getPlaca().value());
         Assertions.assertEquals(1, command.getCantidadProducto().value());
+        Mockito.verify(repository).getEventsBy(DETALLE_ID);
     }
 
     private List<DomainEvent> EventStored() {

@@ -57,9 +57,11 @@ class ActualizarVendedorUseCaseTest {
 
         //assert
         var eventVendedorActualizado = (VendedorActualizado) events.get(0);
+        Assertions.assertEquals(ID_VENDEDOR,eventVendedorActualizado.getEntityId().value());
         Assertions.assertEquals("Carlos", eventVendedorActualizado.getNombre().value());
         Assertions.assertEquals("3116989942", eventVendedorActualizado.getNumeroCelular().value());
         Assertions.assertEquals("Barrio el prado", eventVendedorActualizado.getDireccion().value());
+        Mockito.verify(repository).getEventsBy(ID_VENDEDOR);
     }
 
     private List<DomainEvent> EventStored() {

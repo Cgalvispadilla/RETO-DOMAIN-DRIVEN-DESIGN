@@ -48,6 +48,7 @@ class AgregarVentaUseCaseTest {
         //assert
         var eventVentaAgregado = (VentaAgregada) events.get(0);
         Assertions.assertEquals(VENTA_ID, eventVentaAgregado.getVentaID().value());
+        Mockito.verify(repository).getEventsBy(VENTA_ID);
 
     }
 

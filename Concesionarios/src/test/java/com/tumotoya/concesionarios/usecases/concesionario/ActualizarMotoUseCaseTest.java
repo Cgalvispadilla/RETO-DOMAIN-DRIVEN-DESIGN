@@ -53,12 +53,13 @@ class ActualizarMotoUseCaseTest {
 
         //assert
         var eventMotoActualizada = (MotoActualizada) events.get(0);
+        Assertions.assertEquals(PLACA, eventMotoActualizada.getPlaca().value());
         Assertions.assertEquals("BOXER", eventMotoActualizada.getNombre().value());
         Assertions.assertEquals("BAJAJ", eventMotoActualizada.getMarca().value());
         Assertions.assertEquals("2022", eventMotoActualizada.getModelo().value());
         Assertions.assertEquals("100", eventMotoActualizada.getCilindraje().value());
         Assertions.assertEquals("4000000", eventMotoActualizada.getValor().value());
-
+        Mockito.verify(repository).getEventsBy(PLACA);
     }
 
     private List<DomainEvent> EventStored() {

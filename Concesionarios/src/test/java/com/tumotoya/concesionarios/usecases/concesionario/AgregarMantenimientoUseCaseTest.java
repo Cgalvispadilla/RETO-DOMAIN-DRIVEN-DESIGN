@@ -50,6 +50,7 @@ class AgregarMantenimientoUseCaseTest {
         Assertions.assertEquals(ID_MANTENIMIENTO, eventMatenimientoAgregado.getMantenimientoID().value());
         Assertions.assertEquals("Cambio de aceite", eventMatenimientoAgregado.getNombre().value());
         Assertions.assertEquals("15000", eventMatenimientoAgregado.getValor().value());
+        Mockito.verify(repository).getEventsBy(ID_MANTENIMIENTO);
     }
 
     private List<DomainEvent> EventStored() {

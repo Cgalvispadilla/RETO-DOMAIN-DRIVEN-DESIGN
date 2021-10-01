@@ -59,6 +59,7 @@ class AgregarVendedorUseCaseTest {
         Assertions.assertEquals(ID_VENDEDOR, eventVendedorAgregado.getVendedorId().value());
         Assertions.assertEquals("3116989942", eventVendedorAgregado.getNumeroCelular().value());
         Assertions.assertEquals("Barrio el prado", eventVendedorAgregado.getDireccion().value());
+        Mockito.verify(repository).getEventsBy(ID_VENDEDOR);
     }
 
     private List<DomainEvent> EventStored() {

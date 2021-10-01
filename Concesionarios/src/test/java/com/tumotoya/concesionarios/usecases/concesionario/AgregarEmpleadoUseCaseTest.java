@@ -59,6 +59,7 @@ class AgregarEmpleadoUseCaseTest {
         Assertions.assertEquals("3116989942", eventEmpleadoAgregado.getNumeroCelular().value());
         Assertions.assertEquals("En algun lugar feliz", eventEmpleadoAgregado.getDireccion().value());
         Assertions.assertEquals("Tengo un rol, tengo una responsabilidad", eventEmpleadoAgregado.getRol().value());
+        Mockito.verify(repository).getEventsBy(ID_EMPLEADO);
     }
 
     private List<DomainEvent> EventStored() {

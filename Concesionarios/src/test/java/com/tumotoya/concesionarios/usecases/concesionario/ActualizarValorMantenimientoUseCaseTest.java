@@ -50,8 +50,9 @@ class ActualizarValorMantenimientoUseCaseTest {
 
         //assert
         var eventValorDetalleActualizado = (ValorMantenimientoActualizado) events.get(0);
+        Assertions.assertEquals(MANTENIMIENTO_ID, eventValorDetalleActualizado.getMantenimientoID().value());
         Assertions.assertEquals("300000",eventValorDetalleActualizado.getValor().value());
-
+        Mockito.verify(repository).getEventsBy(MANTENIMIENTO_ID);
     }
 
     private List<DomainEvent> eventStored() {

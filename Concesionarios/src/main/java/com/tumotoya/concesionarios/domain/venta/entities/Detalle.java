@@ -21,15 +21,15 @@ public class Detalle extends Entity<DetalleID> {
         this.cantidadProducto = cantidadProducto;
     }
 
-    public DetalleID getDetalleID() {
+    public DetalleID detalleID() {
         return detalleID;
     }
 
-    public Placa getPlaca() {
+    public Placa placa() {
         return placa;
     }
 
-    public CantidadProducto getCantidadProducto() {
+    public CantidadProducto cantidadProducto() {
         return cantidadProducto;
     }
 }

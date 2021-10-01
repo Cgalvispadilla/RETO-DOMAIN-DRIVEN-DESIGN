@@ -1,12 +1,10 @@
 package com.tumotoya.concesionarios.domain.concesionario;
 
 import co.com.sofka.domain.generic.EventChange;
-import com.tumotoya.concesionarios.domain.concesionario.commands.AgregarMantenimiento;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Empleado;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Mantenimiento;
 import com.tumotoya.concesionarios.domain.concesionario.entities.Moto;
 import com.tumotoya.concesionarios.domain.concesionario.events.*;
-import com.tumotoya.concesionarios.domain.concesionario.values.EmpleadoID;
 import com.tumotoya.concesionarios.domain.venta.values.VentaID;
 
 import java.util.HashSet;
@@ -72,6 +70,12 @@ public class ConcesionarioChange extends EventChange {
             moto.actualizarMarca(event.getMarca());
             moto.actualizarModelo(event.getModelo());
             moto.actualizarValor(event.getValor());
+        });
+
+        apply((ValorMantenimientoActualizado event) -> {
+            var mantenimiento = concesionario.obtenerMatenimientoPorId(event.getMantenimientoID())
+                    .orElseThrow(() -> new IllegalArgumentException("No existe ningún mantenimiento con el id " + event.getMantenimientoID()));
+            mantenimiento.actualizarValor(event.getValor());
         });
 
     }

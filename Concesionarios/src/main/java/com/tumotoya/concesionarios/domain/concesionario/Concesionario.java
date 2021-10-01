@@ -90,6 +90,11 @@ public class Concesionario extends AggregateEvent<ConcesionarioID> {
         Objects.requireNonNull(valor);
         appendChange(new MotoActualizada(placa, nombre, marca, modelo, cilindraje, valor)).apply();
     }
+    public void actualizarValorMantenimiento(MantenimientoID mantenimientoID, Valor valor){
+        Objects.requireNonNull(mantenimientoID);
+        Objects.requireNonNull(valor);
+        appendChange(new ValorMantenimientoActualizado(mantenimientoID,valor)).apply();
+    }
     public Optional<Empleado> obtenerEmpleadoPorId(EmpleadoID empleadoID) {
         return empleados().stream()
                 .filter(empleado -> empleado.identity().equals(empleadoID))

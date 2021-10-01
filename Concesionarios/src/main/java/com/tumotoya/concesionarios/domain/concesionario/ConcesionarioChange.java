@@ -54,5 +54,15 @@ public class ConcesionarioChange extends EventChange {
         apply((VentaAgregada event)->{
             concesionario.ventas.add(new VentaID(event.getVentaID().value()));
         });
+
+        apply((EmpleadoActualizado event)->{
+            var empleado=concesionario.obtenerEmpleadoPorId(event.getEntityId())
+                    .orElseThrow(()-> new IllegalArgumentException("No existe ningun empleado con el id"+event.getEntityId()));
+            empleado.actualizarNombre(event.getNombre());
+            empleado.actualizarDireccion(event.getDireccion());
+            empleado.actualizarNumeroCelular(event.getNumeroCelular());
+            empleado.actualizarRol(event.getRol());
+        });
+
     }
 }

@@ -52,10 +52,10 @@ class ActualizarClienteUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var eventVendedorActualizado = (ClienteActualizado) events.get(0);
-        Assertions.assertEquals("Andres Galvis", eventVendedorActualizado.getNombre().value());
-        Assertions.assertEquals("3116989942", eventVendedorActualizado.getNumeroCelular().value());
-        Assertions.assertEquals("En algun lugar feliz vive", eventVendedorActualizado.getDireccion().value());
+        var eventClienteActualizado = (ClienteActualizado) events.get(0);
+        Assertions.assertEquals("Andres Galvis", eventClienteActualizado.getNombre().value());
+        Assertions.assertEquals("3116989942", eventClienteActualizado.getNumeroCelular().value());
+        Assertions.assertEquals("En algun lugar feliz vive", eventClienteActualizado.getDireccion().value());
     }
 
     private List<DomainEvent> EventStored() {

@@ -13,10 +13,13 @@ import com.tumotoya.concesionarios.domain.generics.values.NumeroCelular;
 import com.tumotoya.concesionarios.domain.generics.values.Placa;
 import com.tumotoya.concesionarios.domain.venta.Venta;
 import com.tumotoya.concesionarios.domain.venta.VentaChange;
+import com.tumotoya.concesionarios.domain.venta.entities.Vendedor;
+import com.tumotoya.concesionarios.domain.venta.values.VendedorID;
 import com.tumotoya.concesionarios.domain.venta.values.VentaID;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class Concesionario extends AggregateEvent<ConcesionarioID> {
@@ -71,5 +74,45 @@ public class Concesionario extends AggregateEvent<ConcesionarioID> {
         Objects.requireNonNull(ventaID);
         appendChange(new VentaAgregada(ventaID)).apply();
     }
+    public void actualizarEmpleado(EmpleadoID entityId, Nombre nombre, NumeroCelular numeroCelular, Direccion direccion, Rol rol){
+        Objects.requireNonNull(entityId);
+        Objects.requireNonNull(nombre);
+        Objects.requireNonNull(numeroCelular);
+        Objects.requireNonNull(direccion);
+        appendChange(new EmpleadoActualizado(entityId, nombre, numeroCelular, direccion, rol)).apply();
+    }
+    public Optional<Empleado> obtenerEmpleadoPorId(EmpleadoID empleadoID) {
+        return empleados().stream()
+                .filter(empleado -> empleado.identity().equals(empleadoID))
+                .findFirst();
+    }
+    public Optional<Moto> obtenerMotoPorPlaca(Placa placa) {
+        return motos().stream()
+                .filter(empleado -> empleado.identity().equals(placa))
+                .findFirst();
+    }
+    public Optional<Mantenimiento> obtenerMatenimientoPorId(MantenimientoID mantenimientoID) {
+        return mantenimientos().stream()
+                .filter(empleado -> empleado.identity().equals(mantenimientoID))
+                .findFirst();
+    }
+    public Nombre nombre() {
+        return nombre;
+    }
 
+    public Set<Empleado> empleados() {
+        return empleados;
+    }
+
+    public Set<Moto> motos() {
+        return motos;
+    }
+
+    public Set<Mantenimiento> mantenimientos() {
+        return mantenimientos;
+    }
+
+    public Set<VentaID> ventas() {
+        return ventas;
+    }
 }
